@@ -75,6 +75,8 @@ class KuzzlePlugin extends CorePlugin {
   async printWelcome (message, event) {
     this.context.log.info(`Hook on event ${event}`)
     this.context.log.info(`Hello from plugin: ${message}`)
+
+    return true
   }
 }
 

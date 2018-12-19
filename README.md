@@ -11,6 +11,7 @@ This boilerplate allows you to quickly start developing a Kuzzle plugin.
 It proposes an architecture to better separate the different files of the plugin, especially the controllers.  
 
 It is recommended to use the Kuzzle Docker stack provided with the boilerplate in order to take advantage of the plugin's hot reload each time the code is modified.
+
 ## Plugin development
 
 ### Add controller
@@ -62,7 +63,7 @@ module.exports = (context, config) => ({
 ### Declare hooks and pipes
 
 Hooks and pipes must be declared in the file `KuzzlePlugin.js`.  
-The corresponding methods must also be reported in this file.  
+The corresponding methods must also be declared in this file.  
 
 ## Plugin deployment
 
@@ -70,6 +71,25 @@ The corresponding methods must also be reported in this file.
 
 Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
 
+```js
+  init (customConfig, content) {
+    // [...]
+
+    // Execute a hook when Kuzzle server is ready
+    this.hooks = {
+      'core:kuzzleStart': 'printWelcome'
+    }
+
+    // [...]  
+  }
+
+  async printWelcome (message, event) {
+    this.context.log.info(`Hook on event ${event}`)
+    this.context.log.info(`Hello from plugin: ${message}`)
+
+    return true
+  }
+```
 
 
 **Note.** If you are running Kuzzle within a Docker container, you will need to mount the local plugin installation directory as a volume in the container.
