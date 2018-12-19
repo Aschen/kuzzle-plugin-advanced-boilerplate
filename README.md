@@ -7,8 +7,10 @@ Here, you'll find the boilerplate to start coding a new [Kuzzle Core Plugin](htt
 * [add a controller route](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-controllers) to expose new actions to the API;
 * [add an authentication strategy](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-authentication-strategy) to Kuzzle.
 
-The boilerplate demonstrates each feature of a Kuzzle Plugin.
+This boilerplate allows you to quickly start developing a Kuzzle plugin.  
+It proposes an architecture to better separate the different files of the plugin, especially the controllers.  
 
+It is recommended to use the Kuzzle Docker stack provided with the boilerplate in order to take advantage of the plugin's hot reload each time the code is modified.
 ## Plugin development
 
 ### Add controller
