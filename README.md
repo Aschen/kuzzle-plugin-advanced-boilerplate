@@ -65,12 +65,6 @@ module.exports = (context, config) => ({
 Hooks and pipes must be declared in the file `KuzzlePlugin.js`.  
 The corresponding methods must also be declared in this file.  
 
-## Plugin deployment
-
-### On an existing Kuzzle
-
-Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
-
 ```js
   init (customConfig, content) {
     // [...]
@@ -91,6 +85,11 @@ Clone this repository locally and make it accessible from the `plugins/enabled` 
   }
 ```
 
+## Plugin deployment
+
+### On an existing Kuzzle
+
+Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
 
 **Note.** If you are running Kuzzle within a Docker container, you will need to mount the local plugin installation directory as a volume in the container.
 
