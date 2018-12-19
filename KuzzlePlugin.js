@@ -55,7 +55,10 @@ class KuzzlePlugin extends CorePlugin {
 
     this.controllersInstances = buildControllers(context, this.config)
 
-    this.hooks = {}
+    // Execute a hook when Kuzzle server is ready
+    this.hooks = {
+      'core:kuzzleStart': 'printWelcome'
+    }
 
     this.pipes = {}
 
@@ -67,6 +70,11 @@ class KuzzlePlugin extends CorePlugin {
       Object.values(this.controllersInstances)
         .map(controller => controller.routesMapping())
     )
+  }
+
+  async printWelcome (message, event) {
+    this.context.log.info(`Hook on event ${event}`)
+    this.context.log.info(`Hello from plugin: ${message}`)
   }
 }
 
