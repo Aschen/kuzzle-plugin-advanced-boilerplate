@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-plugin-advanced-boilerplate",
-  "author": "Aschen <aschen@protonmail.com>",
+  "author": "Kuzzle Team <support@kuzzle.io>",
   "version": "1.0.0",
   "description": "Kuzzle plugin advanced boilerplate template",
   "main": "KuzzlePlugin.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aschen/kuzzle-plugin-advanced-boilerplate.git"
+    "url": "git+https://github.com/kuzzleio/kuzzle-plugin-advanced-boilerplate.git"
   },
   "keywords": [
     "kuzzle",
@@ -20,9 +20,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/aschen/kuzzle-plugin-advanced-boilerplate/issues"
+    "url": "https://github.com/kuzzleio/kuzzle-plugin-advanced-boilerplate/issues"
   },
-  "homepage": "https://github.com/aschen/kuzzle-plugin-advanced-boilerplate#readme",
+  "homepage": "https://github.com/kuzzleio/kuzzle-plugin-advanced-boilerplate#readme",
   "devDependencies": {
     "eslint": "^4.18.2",
     "istanbul": "^0.4.4",
