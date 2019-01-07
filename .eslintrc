@@ -43,7 +43,7 @@
     "no-useless-call": 2,
     "no-with": 2,
     "quotes": [2, "single"],
-    "semi": [2, "never"],
+    "semi": [2, "always"],
     "space-before-blocks": 2,
     "space-in-parens": [2, "never"],
     "vars-on-top": 2,
@@ -52,7 +52,7 @@
   "env": {
     "mocha": true,
     "node": true,
-    "es6": true,
+    "es6": true
   },
   "parserOptions": {
     "ecmaVersion": 8

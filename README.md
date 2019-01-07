@@ -112,7 +112,7 @@ This command will start a Kuzzle stack with this plugin enabled. To make develop
 You can choose to work on the Kuzzle development branch by defining the following environment variables before launching `docker-compose`:
 
 ```bash
-$ export KUZZLE_DOCKER_TAG=1.2.13
+$ export KUZZLE_DOCKER_TAG=1.4.2
 $ docker-compose -f docker/docker-compose.yml up
 ```
 

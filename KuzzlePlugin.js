@@ -22,7 +22,7 @@
 const
   _ = require('lodash'),
   CorePlugin = require('./lib/CorePlugin'),
-  buildControllers = require('./lib/controllers')
+  buildControllers = require('./lib/controllers');
 
 /**
  * @class KuzzlePlugin
@@ -39,9 +39,9 @@ const
  */
 class KuzzlePlugin extends CorePlugin {
   constructor () {
-    super()
+    super();
 
-    this.defaultConfig = {}
+    this.defaultConfig = {};
   }
 
   /**
@@ -51,33 +51,33 @@ class KuzzlePlugin extends CorePlugin {
   init (customConfig, context) {
     this.config = Object.assign(this.defaultConfig, customConfig);
 
-    this.context = context
+    this.context = context;
 
-    this.controllersInstances = buildControllers(context, this.config)
+    this.controllersInstances = buildControllers(context, this.config);
 
     // Execute a hook when Kuzzle server is ready
     this.hooks = {
       'core:kuzzleStart': 'printWelcome'
-    }
+    };
 
-    this.pipes = {}
+    this.pipes = {};
 
     this.controllers =
       Object.values(this.controllersInstances)
-        .reduce((memo, controller) => Object.assign(memo, controller.actionsMapping()), {})
+        .reduce((memo, controller) => Object.assign(memo, controller.actionsMapping()), {});
 
     this.routes = _.flatten(
       Object.values(this.controllersInstances)
         .map(controller => controller.routesMapping())
-    )
+    );
   }
 
   async printWelcome (message, event) {
-    this.context.log.info(`Hook on event ${event}`)
-    this.context.log.info(`Hello from plugin: ${message}`)
+    this.context.log.info(`Hook on event ${event}`);
+    this.context.log.info(`Hello from plugin: ${message}`);
 
-    return true
+    return true;
   }
 }
 
-module.exports = KuzzlePlugin
+module.exports = KuzzlePlugin;
