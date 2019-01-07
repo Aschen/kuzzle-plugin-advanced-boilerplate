@@ -34,6 +34,7 @@
     "sinon": "^4.4.6"
   },
   "dependencies": {
+    "kuzzle-common-objects": "^3.0.13",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
   }
