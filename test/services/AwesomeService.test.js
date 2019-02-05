@@ -40,5 +40,13 @@ describe('AwesomeService', () => {
 
       should(modifiedRequest.input.body.awesomeness).be.eql('Sehr gut');
     });
+
+    it('increments the message count in redis', async () => {
+      await awesomeService.addAwesomeness(request);
+
+      should(contextMock.accessors.sdk.ms.incr).be.calledOnce();
+      should(contextMock.accessors.sdk.ms.incr).be.calledWith('Sehr gut');
+    });
+
   });
 });

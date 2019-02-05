@@ -26,7 +26,8 @@ class ContextMock {
         },
         ms: {
           get: sinon.stub().resolves(),
-          set: sinon.stub().resolves()
+          set: sinon.stub().resolves(),
+          incr: sinon.stub().resolves()
         },
         security: {
           getProfile: sinon.stub().resolves(),

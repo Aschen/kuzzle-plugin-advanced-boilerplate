@@ -5,7 +5,7 @@
       "pipeWarnTime": 40,
       "pipeTimeout": 250,
       "initTimeout": 2000
-    }
+    },
 
     "kuzzle-plugin-advanced-boilerplate": {
       "awesomeMessages": ["Awesome", "Great", "Marvelous", "Fantastic", "Splendid"]
