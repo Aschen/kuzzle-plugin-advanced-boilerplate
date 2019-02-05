@@ -135,7 +135,8 @@ These environment variables enable you to specify any existing build tag availab
 #### Customizing the plugin instance name
 
 You may like to name your plugin differently than the name of this repo. 
-To do so, rename the local directory of the repo and also the content of the `name` property in `package.json` and `manifest.json` files.
+To do so, rename the local directory of the repo and also the content of the `name` property in `package.json` and `manifest.json` files.  
+Finally you have to change the plugin destination path inside the [docker-compose.yml](docker/docker-compose.yml#14) file.
 
 ## `manifest.json` file
 

@@ -11,7 +11,7 @@ services:
       - "./default-fixtures.json:/default-fixtures.json"
       - "./default-securities.json:/default-securities.json"
       - "./pm2.json:/config/pm2.json"
-      - "..:/var/app/plugins/enabled/${PLUGIN_NAME:-kuzzle-core-plugin-boilerplate}"
+      - "..:/var/app/plugins/enabled/kuzzle-plugin-advanced-boilerplate"
       - "./kuzzlerc:/etc/kuzzlerc"
     cap_add:
       - SYS_PTRACE
