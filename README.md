@@ -135,8 +135,11 @@ These environment variables enable you to specify any existing build tag availab
 #### Customizing the plugin instance name
 
 You may like to name your plugin differently than the name of this repo. 
-To do so, rename the local directory of the repo and also the content of the `name` property in `package.json` and `manifest.json` files.  
-Finally you have to change the plugin destination path inside the [docker-compose.yml](docker/docker-compose.yml#14) file.
+To do so, you have to replace `kuzzle-plugin-advanced-boilerplate` with the name of your choice in the following files:
+ - `package.json`
+ - `manifest.json`
+ - `docker/kuzzlerc`
+ - `docker/docker-compose.yml`
 
 ## `manifest.json` file
 
@@ -155,6 +158,6 @@ Finally you have to change the plugin destination path inside the [docker-compos
   * Use semver notation to born Kuzzle version this plugins supports
   * - if set, and installation requirement is not meet, an error will be thrown and Kuzzle will not start
   */
-  "kuzzleVersion": ">=1.5.4 <2.0.0"
+  "kuzzleVersion": ">=1.6.0 <2.0.0"
 }
 ```
