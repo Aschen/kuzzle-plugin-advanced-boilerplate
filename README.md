@@ -20,7 +20,6 @@ Each class can inherit the [PluginContext](lib/PluginContext.js) class , the onl
 
 It is then possible to use the following helpers:
  - `this.throwError(errorType, message)`: Throws a KuzzleError
- - `this.currentUser(request)`: Returns the current authenticated user
  - `this.param(request, paramPath)`: Extracts a parameter from the request input
  - `this.stringParam(request, paramPath)`: Extracts a string parameter from the request input
  - `this.booleanParam(request, paramPath)`: Extract a boolean parameter from the request input

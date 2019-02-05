@@ -21,6 +21,7 @@
 
 const
   _ = require('lodash'),
+  AwesomeService = require('./lib/services/AwesomeService'),
   buildControllers = require('./lib/controllers');
 
 /**
@@ -38,7 +39,11 @@ const
  */
 class KuzzlePlugin {
   constructor () {
-    this.defaultConfig = {};
+    // Define a default configuration that will be overwritten by the one
+    // defined in the kuzzlerc file
+    this.defaultConfig = {
+      awesomeMessage: ['some', 'default', 'messages']
+    };
   }
 
   /**
@@ -53,7 +58,6 @@ class KuzzlePlugin {
     return this.controllersInstances[controller][action](request);
   }
 
-
   /**
    * @param {KuzzlePluginContext} context
    */
@@ -62,13 +66,20 @@ class KuzzlePlugin {
 
     this.context = context;
 
+    // Instantiate our service with the context and config provided by Kuzzle
+    this.awesomeService = new AwesomeService(this.context, this.config);
+
     this.controllersInstances = buildControllers(context, this.config);
 
+    // Execute a hook when Kuzzle server is ready
     this.hooks = {
-      'core:kuzzleStart': 'printWelcome' // Execute a hook when Kuzzle server is ready
+      'core:kuzzleStart': 'printWelcome'
     };
 
-    this.pipes = {};
+    // Modify created document with a pipe
+    this.pipes = {
+      'document:beforeCreate': (...args) => this.awesomeService.addAwesomeness(...args)
+    };
 
     this.controllers =
       Object.values(this.controllersInstances)
@@ -80,11 +91,15 @@ class KuzzlePlugin {
     );
   }
 
-  async printWelcome (message, event) {
+  /**
+   * Print a message in the console when Kuzzle server is ready
+   *
+   * @param {string} kuzzleMessage
+   * @param {string} event
+   */
+  async printWelcome (kuzzleMessage, event) {
     this.context.log.info(`Hook on event ${event}`);
-    this.context.log.info(`Hello from plugin: ${message}`);
-
-    return true;
+    this.context.log.info(`Hello from plugin: ${kuzzleMessage}`);
   }
 }
 

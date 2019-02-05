@@ -9,8 +9,8 @@ class RequestMock {
     this.context.connection = this.context.connection || {};
 
     this.input = this.input || {};
-    this.input.body = this.input.body || {};
-    this.input.args = this.input.args || {};
+    this.input.body = this.input.body || null;
+    this.input.args = this.input.args || null;
 
     this.result = this.result || {};
   }

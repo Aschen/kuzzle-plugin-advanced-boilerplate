@@ -8,7 +8,7 @@
     }
 
     "kuzzle-plugin-advanced-boilerplate": {
-      "song": "who lets the dog out? woof woof woof woof"
+      "awesomeMessages": ["Awesome", "Great", "Marvelous", "Fantastic", "Splendid"]
     }
   }
 }
