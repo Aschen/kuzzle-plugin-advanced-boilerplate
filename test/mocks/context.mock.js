@@ -8,7 +8,29 @@ class ContextMock {
     this.accessors = {
       sdk: {
         document: {
-          update: sinon.stub().resolves()
+          createOrReplace: sinon.stub().resolves(),
+          create: sinon.stub().resolves(),
+          update: sinon.stub().resolves(),
+          search: sinon.stub().resolves(),
+          get: sinon.stub().resolves(),
+          delete: sinon.stub().resolves()
+        },
+        index: {
+          create: sinon.stub().resolves(),
+          list: sinon.stub().resolves(),
+          exists: sinon.stub().resolves()
+        },
+        collection: {
+          create: sinon.stub().resolves(),
+          updateSpecifications: sinon.stub().resolves()
+        },
+        ms: {
+          get: sinon.stub().resolves(),
+          set: sinon.stub().resolves()
+        },
+        security: {
+          getProfile: sinon.stub().resolves(),
+          createProfile: sinon.stub().resolves()
         }
       },
       execute: sinon.stub().resolves()

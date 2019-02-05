@@ -14,6 +14,22 @@ It is recommended to use the Kuzzle Docker stack provided with the boilerplate i
 
 ## Plugin development
 
+## PluginContext class
+
+Each class can inherit the [PluginContext](lib/PluginContext.js) class , the only constraint is that the constructor of this class must be called with the context and configuration of the plugin provided by Kuzzle and passed to the [init](KuzzlePlugin.js#51) method of the plugin.  
+
+It is then possible to use the following helpers:
+ - `this.throwError(errorType, message)`: Throws a KuzzleError
+ - `this.currentUser(request)`: Returns the current authenticated user
+ - `this.param(request, paramPath)`: Extracts a parameter from the request input
+ - `this.stringParam(request, paramPath)`: Extracts a string parameter from the request input
+ - `this.booleanParam(request, paramPath)`: Extract a boolean parameter from the request input
+ - `this.floatParam(request, paramPath)`: Extract a float parameter from the request input
+ - `this.integerParam(request, paramPath)`: Extract an integer parameter from the request input
+ - `this.objectParam(request, paramPath)`: Extract an object parameter from the request input
+ - `this.arrayParam(request, paramPath)`: Extract an array parameter from the request input
+ 
+
 ### Add controller
 
 This boilerplate allows you to decouple the logic of the different controllers in different files.  
@@ -63,7 +79,6 @@ module.exports = (context, config) => ({
 ### Declare hooks and pipes
 
 Hooks and pipes must be declared in the file `KuzzlePlugin.js`.  
-The corresponding methods must also be declared in this file.  
 
 ```js
   init (customConfig, content) {
@@ -71,7 +86,7 @@ The corresponding methods must also be declared in this file.
 
     // Execute a hook when Kuzzle server is ready
     this.hooks = {
-      'core:kuzzleStart': 'printWelcome'
+      'core:kuzzleStart': (...args) => this.printWelcome(...args)
     }
 
     // [...]  
@@ -87,17 +102,9 @@ The corresponding methods must also be declared in this file.
 
 ## Plugin deployment
 
-### On an existing Kuzzle
-
-Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
-
-**Note.** If you are running Kuzzle within a Docker container, you will need to mount the local plugin installation directory as a volume in the container.
-
-Please refer to the Guide for further instructions on [how to install Kuzzle plugins](http://docs.kuzzle.io/guide/essentials/plugins/#managing-plugins).
-
 ### On a pristine Kuzzle stack
 
-You can use the `docker-compose.yml` file included in this repository to start a development-oriented stack to help you creating your custom Kuzzle Core plugin.
+You can use the [docker-compose.yml](docker/docker-compose.yml) file included in this repository to start a development-oriented stack to help you creating your custom Kuzzle Core plugin.
 
 Clone this repository locally and type:
 
@@ -106,6 +113,14 @@ $ docker-compose -f docker/docker-compose.yml up
 ```
 
 This command will start a Kuzzle stack with this plugin enabled. To make development more confortable, a watcher will also be activated, restarting Kuzzle every time a modification is detected.
+
+### On an existing Kuzzle
+
+Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
+
+**Note.** If you are running Kuzzle within a Docker container, you will need to mount the local plugin installation directory as a volume in the container.
+
+Please refer to the Guide for further instructions on [how to install Kuzzle plugins](http://docs.kuzzle.io/guide/essentials/plugins/#managing-plugins).
 
 #### Working on a different Kuzzle tag
 
@@ -120,12 +135,8 @@ These environment variables enable you to specify any existing build tag availab
 
 #### Customizing the plugin instance name
 
-You may like to name your plugin differently than the name of this repo. To do so, rename the local directory of the repo and define the following environment variable before launching the development stack:
-
-```bash
-$ export PLUGIN_NAME=my-awesome-plugin
-$ docker-compose -f docker/docker-compose.yml up
-```
+You may like to name your plugin differently than the name of this repo. 
+To do so, rename the local directory of the repo and also the content of the `name` property in `package.json` and `manifest.json` files.
 
 ## `manifest.json` file
 

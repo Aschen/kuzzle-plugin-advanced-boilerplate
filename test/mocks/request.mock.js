@@ -6,6 +6,7 @@ class RequestMock {
 
     this.context = this.context || {};
     this.context.user = this.context.user || {};
+    this.context.connection = this.context.connection || {};
 
     this.input = this.input || {};
     this.input.body = this.input.body || {};

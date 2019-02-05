@@ -21,7 +21,6 @@
 
 const
   _ = require('lodash'),
-  CorePlugin = require('./lib/CorePlugin'),
   buildControllers = require('./lib/controllers');
 
 /**
@@ -37,16 +36,26 @@ const
  *
  * @externs
  */
-class KuzzlePlugin extends CorePlugin {
+class KuzzlePlugin {
   constructor () {
-    super();
-
     this.defaultConfig = {};
   }
 
   /**
+   * Internal method used to map controller action
+   * @param {KuzzleRequest} request
+   * @returns {Promise.<T>}
+   */
+  async callAction (request) {
+    const controller = request.input.controller.split('/')[1];
+    const action = request.input.action;
+
+    return this.controllersInstances[controller][action](request);
+  }
+
+
+  /**
    * @param {KuzzlePluginContext} context
-   * @returns {Promise.<boolean>}
    */
   init (customConfig, context) {
     this.config = Object.assign(this.defaultConfig, customConfig);
@@ -55,9 +64,8 @@ class KuzzlePlugin extends CorePlugin {
 
     this.controllersInstances = buildControllers(context, this.config);
 
-    // Execute a hook when Kuzzle server is ready
     this.hooks = {
-      'core:kuzzleStart': 'printWelcome'
+      'core:kuzzleStart': 'printWelcome' // Execute a hook when Kuzzle server is ready
     };
 
     this.pipes = {};

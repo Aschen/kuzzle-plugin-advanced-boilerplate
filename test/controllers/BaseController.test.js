@@ -1,13 +1,16 @@
 const
   BaseController = require('../../lib/controllers/BaseController'),
+  ContextMock = require('../mocks/context.mock'),
   should = require('should');
 
 describe('BaseController', () => {
   let
+    contextMock,
     baseController;
 
   beforeEach(() => {
-    baseController = new BaseController({}, {});
+    contextMock = new ContextMock();
+    baseController = new BaseController(contextMock, {});
   });
 
   describe('#actionsMapping', () => {
@@ -20,8 +23,8 @@ describe('BaseController', () => {
 
       should(actionsMapping).be.eql({
         base: {
-          foo: 'call',
-          bar: 'call'
+          foo: 'callAction',
+          bar: 'callAction'
         }
       });
     });

@@ -19,7 +19,7 @@ describe('ExampleController', () => {
 
       const response = await exampleController.info(request);
 
-      should(response).be.eql('Hello from example/info. Current user id: aschen');
+      should(response).be.eql('Hello from example:info. Current user id: aschen');
     });
   });
 
