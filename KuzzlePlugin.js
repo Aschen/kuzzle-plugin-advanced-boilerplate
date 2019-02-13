@@ -26,7 +26,6 @@ const
 
 /**
  * @class KuzzlePlugin
- * @extends CorePlugin
  *
  * @property {KuzzlePluginContext} context
  * @property {ControllerImplementations} controllersInstances
