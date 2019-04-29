@@ -4,7 +4,7 @@ const
   _ = require('lodash'),
   { After, Before, AfterAll, BeforeAll } = require('cucumber'),
   { Kuzzle, WebSocket } = require('kuzzle-sdk'),
-  defaultMappings = require('../../docker/default-mappings'),
+  defaultMappings = require('../../fixtures/default-mappings'),
   testMappings = require('../fixtures/mappings'),
   testFixtures = require('../fixtures/fixtures'),
   testSecurities = require('../fixtures/securities'),
@@ -17,7 +17,7 @@ BeforeAll(async function () {
   world.kuzzle = new Kuzzle(
     new WebSocket(world.host, { port: world.port })
   );  
-
+  
   await world.kuzzle.connect();
 
   console.log('Loading default securities..');

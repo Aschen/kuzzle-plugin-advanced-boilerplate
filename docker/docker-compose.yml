@@ -7,12 +7,12 @@ services:
     volumes:
       - "./run-dev.sh:/run-dev.sh"
       - "./install-plugins.sh:/install-plugins.sh"
-      - "./default-mappings.json:/default-mappings.json"
-      - "./default-fixtures.json:/default-fixtures.json"
-      - "./default-securities.json:/default-securities.json"
+      - "../fixtures/default-mappings.json:/default-mappings.json"
+      - "../fixtures/default-fixtures.json:/default-fixtures.json"
+      - "../fixtures/default-securities.json:/default-securities.json"
       - "./pm2.json:/config/pm2.json"
       - "..:/var/app/plugins/enabled/kuzzle-plugin-advanced-boilerplate"
-      - "./kuzzlerc:/etc/kuzzlerc"
+      - "../kuzzlerc:/etc/kuzzlerc"
     cap_add:
       - SYS_PTRACE
     ulimits:
