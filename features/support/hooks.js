@@ -58,7 +58,7 @@ Before(async function () {
 });
 
 After(function () {
-  // Intermediate steps should store values inside this object
+  // Clean values stored by the scenario
   this.props = {};
 
   if (this.kuzzle && typeof this.kuzzle.disconnect === 'function') {

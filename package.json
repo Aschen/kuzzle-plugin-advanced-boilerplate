@@ -5,7 +5,7 @@
   "description": "Kuzzle plugin advanced boilerplate template",
   "main": "KuzzlePlugin.js",
   "scripts": {
-    "test": "npm run --silent lint && npm run --silent unit-testing",
+    "test": "npm run --silent lint && npm run --silent unit-testing && npm run functional-testing",
     "lint": "./node_modules/.bin/eslint --max-warnings=0 ./lib ./test ./KuzzlePlugin.js",
     "unit-testing": "nyc --reporter=text-summary --reporter=lcov mocha",
     "functional-testing": "./node_modules/.bin/cucumber-js"
