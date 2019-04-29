@@ -21,7 +21,7 @@ BeforeAll(async function () {
   await world.kuzzle.connect();
 
   console.log('Loading default securities..');
-  
+
   await world.kuzzle.query({
     controller: 'admin',
     action: 'loadSecurities',
@@ -58,6 +58,9 @@ Before(async function () {
 });
 
 After(function () {
+  // Intermediate steps should store values inside this object
+  this.props = {};
+
   if (this.kuzzle && typeof this.kuzzle.disconnect === 'function') {
     return this.kuzzle.query({
       controller: 'admin',
