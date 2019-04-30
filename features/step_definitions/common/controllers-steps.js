@@ -5,7 +5,7 @@ const
     Then
   } = require('cucumber');
 
-When(/I call the( plugin)? "(.*)":"(.*)" route/, async function (plugin, controller, action) {
+When(/I call the( plugin)? route "(.*)":"(.*)"/, async function (plugin, controller, action) {
   if (plugin) {
     controller = `${this.pluginName}/${controller}`;
   }

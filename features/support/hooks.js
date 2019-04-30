@@ -34,7 +34,7 @@ BeforeAll(async function () {
 
 Before(async function () {
   const
-    mappings = Object.assign({}, defaultMappings, testMappings);
+    mappings = Object.assign({}, testMappings, defaultMappings);
 
   this.kuzzle = new Kuzzle(
     new WebSocket(this.host, { port: this.port })

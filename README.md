@@ -16,7 +16,7 @@ It is recommended to use the Kuzzle Docker stack provided with the boilerplate i
 
 ## PluginContext class
 
-Each class can inherit the [PluginContext](lib/PluginContext.js) class , the only constraint is that the constructor of this class must be called with the context and configuration of the plugin provided by Kuzzle and passed to the [init](KuzzlePlugin.js#51) method of the plugin.  
+Each class can inherit the [PluginContext](lib/PluginContext.js) class , the only constraint is that the constructor of this class must be called with the context and configuration of the plugin provided by Kuzzle and passed to the [init](lib/KuzzlePlugin.js#51) method of the plugin.  
 
 It is then possible to use the following helpers:
  - `this.throwError(errorType, message)`: Throws a KuzzleError
@@ -79,7 +79,7 @@ module.exports = (context, config) => ({
 
 ### Declare hooks and pipes
 
-Hooks and pipes must be declared in the file `KuzzlePlugin.js`.  
+Hooks and pipes must be declared in the file `lib/KuzzlePlugin.js`.  
 
 ```js
   init (customConfig, content) {

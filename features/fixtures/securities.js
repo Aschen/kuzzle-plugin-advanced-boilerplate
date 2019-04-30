@@ -2,13 +2,13 @@
 
 module.exports = {
   users: {
-    admin: {
+    'test-admin': {
       content: {
         profileIds: ['admin']
       },
       credentials: {
         local: {
-          username: 'admin',
+          username: 'test-admin',
           password: 'password'
         }
       }
