@@ -1,4 +1,4 @@
-const
+const 
   RequestMock = require('./request.mock'),
   KuzzleErrors = require('kuzzle-common-objects').errors,
   sinon = require('sinon');
@@ -31,8 +31,12 @@ class ContextMock {
         },
         security: {
           getProfile: sinon.stub().resolves(),
-          createProfile: sinon.stub().resolves()
-        }
+          createProfile: sinon.stub().resolves(),
+          updateUser: sinon.stub().resolves(),
+          searchUsers: sinon.stub().resolves(),
+          updateCredentials: sinon.stub().resolves()
+        },
+        query: sinon.stub().resolves()
       },
       execute: sinon.stub().resolves()
     };
