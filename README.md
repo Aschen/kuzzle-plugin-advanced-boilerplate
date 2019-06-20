@@ -107,6 +107,15 @@ Hooks and pipes must be declared in the file `lib/KuzzlePlugin.js`.
   }
 ```
 
+### Use [Vault](https://docs.kuzzle.io/core/1/guides/essentials/secrets-vault/) for API keys
+
+You can write your secrets in `config/secrets.json`.  
+
+Then to encrypt it you can run the following command: `KUZZLE_VAULT_KEY=strongpassword docker-compose run kuzzle ./bin/kuzzle encryptSecrets /var/app/config/secrets.json`  
+It will generate a `config/secrets.enc.json` file that you can safely commit to your repository.  
+
+Finally you can start your development stack with the vault key to access secrets into your plugin: `KUZZLE_VAULT_KEY=strongpassword docker-compose up`
+
 ## Plugin deployment
 
 ### On a pristine Kuzzle stack
