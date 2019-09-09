@@ -31,7 +31,7 @@ services:
       - kuzzle_services__internalCache__node__host=redis
       - kuzzle_services__memoryStorage__node__host=redis
       - NODE_ENV=development
-      - DEBUG=kuzzle:plugins
+      - DEBUG=kuzzle:*,-kuzzle:entry-point:protocols:websocket
       - KUZZLE_VAULT_KEY=${KUZZLE_VAULT_KEY}
 
   redis:

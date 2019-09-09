@@ -17,8 +17,8 @@ BeforeAll(async function () {
 
   world.kuzzle = new Kuzzle(
     new WebSocket(world.host, { port: world.port })
-  );  
-  
+  );
+
   await world.kuzzle.connect();
 
   console.log('Loading default securities..');
@@ -40,8 +40,8 @@ Before(async function () {
 
   this.kuzzle = new Kuzzle(
     new WebSocket(this.host, { port: this.port })
-  );  
-  
+  );
+
   await this.kuzzle.connect();
   await this.kuzzle.auth.login('local', { username: 'test-admin', password: 'password' });
 
@@ -63,7 +63,7 @@ Before(async function () {
     action: 'loadFixtures',
     body: fixtures,
     refresh: 'wait_for'
-  });  
+  });
 });
 
 After(async function () {
@@ -73,4 +73,23 @@ After(async function () {
   if (this.kuzzle && typeof this.kuzzle.disconnect === 'function') {
     this.kuzzle.disconnect();
   }
+});
+
+Before({ tags: '@security', timeout: 10 * 1000 }, async function () {
+  await this.kuzzle.query({
+    controller: 'admin',
+    action: 'resetSecurity',
+    refresh: 'wait_for'
+  });
+
+  this.kuzzle.jwt = null;
+
+  await this.kuzzle.query({
+    controller: 'admin',
+    action: 'loadSecurities',
+    body: testSecurities,
+    refresh: 'wait_for'
+  });
+
+  await this.kuzzle.auth.login('local', { username: 'test-admin', password: 'password' });
 });
