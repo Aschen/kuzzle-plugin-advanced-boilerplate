@@ -2,32 +2,40 @@
 
 set -e
 
-log () {
-  echo "[$(date --rfc-3339 seconds)] - $1"
-}
+working_dir="/var/app"
+plugins_dir="plugins/enabled"
 
-elastic_host=${kuzzle_services__db__client__host:-http://elasticsearch:9200}
+cd "$working_dir"
 
-/install-plugins.sh
+# If the plugin name is provided, only install it's dependencies
+if [ -n "$KUZZLE_PLUGIN_NAME" ];
+then
+    echo "Installing dependencies for $KUZZLE_PLUGIN_NAME"
+    cd "$plugins_dir/$KUZZLE_PLUGIN_NAME"
 
-log "Waiting for elasticsearch"
-while ! curl -f -s -o /dev/null "$elastic_host"
-do
-    log "Still trying to connect to $elastic_host"
-    sleep 1
-done
-# create a tmp index just to force the shards to init
-curl -XPUT -s -o /dev/null "$elastic_host/%25___tmp"
-log "Elasticsearch is up. Waiting for shards..."
-E=$(curl -s "$elastic_host/_cluster/health?wait_for_status=yellow&wait_for_active_shards=1&timeout=60s")
-curl -XDELETE -s -o /dev/null "$elastic_host/%25___tmp"
+    npm install --unsafe-perm --force
 
-if ! (echo ${E} | grep -E '"status":"(yellow|green)"' > /dev/null); then
-    log "Could not connect to elasticsearch in time. Aborting..."
-    exit 1
+    # This is dirty but we are in a development environment, who cares
+    chmod 777 node_modules/
+    cd "$working_dir"
+else
+  for target in ${plugins_dir}/* ; do
+    if [ -d "$target" ]; then
+      echo 'Installing dependencies for ' $(basename "$target")
+      cd "$target"
+
+      npm install --unsafe-perm --force
+
+      # This is dirty but we are in a development environment, who cares
+      chmod 777 node_modules/
+      cd "$working_dir"
+    fi
+  done
 fi
 
-log "Starting Kuzzle..."
+cd /var/app
 
-pm2 start /config/pm2.json
-pm2 logs --lines 2
+nodemon \
+    --inspect=0.0.0.0:9229 \
+    bin/start-kuzzle-server \
+    $@

@@ -7,13 +7,12 @@ services:
     volumes:
       - "./docker/run-dev.sh:/run-dev.sh"
       - "./docker/install-plugins.sh:/install-plugins.sh"
-      - "./docker/pm2.json:/config/pm2.json"
       - "./fixtures/default-mappings.json:/default-mappings.json"
       - "./fixtures/default-fixtures.json:/default-fixtures.json"
       - "./fixtures/default-securities.json:/default-securities.json"
       - "./config/kuzzlerc:/etc/kuzzlerc"
       - "./config/:/var/app/config/"
-      - ".:/var/app/plugins/enabled/kuzzle-plugin-advanced-boilerplate"
+      - ".:/var/app/plugins/enabled/blablagraille"
     cap_add:
       - SYS_PTRACE
     ulimits:
@@ -24,7 +23,7 @@ services:
       - redis
       - elasticsearch
     ports:
-      - "9229:9229"
+      - "9219:9219"
       - "7512:7512"
     environment:
       - kuzzle_services__storageEngine__client__node=http://elasticsearch:9200
@@ -38,7 +37,7 @@ services:
     image: redis:5
 
   elasticsearch:
-    image: kuzzleio/elasticsearch:7.3.0
+    image: kuzzleio/elasticsearch:7
     ports:
       - "9200:9200"
     ulimits:
