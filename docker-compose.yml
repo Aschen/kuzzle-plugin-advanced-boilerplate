@@ -12,7 +12,7 @@ services:
       - "./fixtures/default-securities.json:/default-securities.json"
       - "./config/kuzzlerc:/etc/kuzzlerc"
       - "./config/:/var/app/config/"
-      - ".:/var/app/plugins/enabled/blablagraille"
+      - ".:/var/app/plugins/enabled/kuzzle-plugin-advanced-boilerplate"
     cap_add:
       - SYS_PTRACE
     ulimits:
@@ -23,7 +23,7 @@ services:
       - redis
       - elasticsearch
     ports:
-      - "9219:9219"
+      - "9229:9229"
       - "7512:7512"
     environment:
       - kuzzle_services__storageEngine__client__node=http://elasticsearch:9200
